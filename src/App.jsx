@@ -2,16 +2,38 @@ import { useState } from "react";
 import articles from './data/articles.js'
 
 function App() {
-  const [newArticle, setNewArticle] = useState("");
+  const [articlesData, setArticlesData] = useState(articles);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const addArticleHandler = (event) => {
+    event.preventDefqult();
+    const newArticle = {
+      id: crypto.randomUUID(),
+      title: title,
+      content: content,
+    }
+    setArticlesData([...articlesData, newArticle]);
+  };
+
   return (
-    <div className="wrapper">
-      {articles.map(article => (
+    <>
+    <section>
+      {articlesData.map(article => (
         <section key={article.id}>
           <h2>{article.title}</h2>
           <p>{article.content}</p>
         </section>
       ))}
-    </div>
+    </section>
+    <hr/>
+    <form onSubmit={addArticleHandler}>
+      <input onChange={(event) => setTitle(event.target.value)} value={title} type="text" />
+      <input onChange={(event) => setContent(event.target.value)} value={content} type="text" />
+      <button type="submit">Aggiungi</button>
+    </form>
+    {console.log(articlesData)}
+    </>
   );
 }
 export default App;
