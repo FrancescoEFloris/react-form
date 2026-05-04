@@ -1,4 +1,4 @@
-articles = [
+const articles = [
     {
         id: 1,
         title: "Il",
