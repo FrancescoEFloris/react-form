@@ -7,7 +7,7 @@ function App() {
   const [content, setContent] = useState("");
 
   const addArticleHandler = (event) => {
-    event.preventDefqult();
+    event.preventDefault();
     const newArticle = {
       id: crypto.randomUUID(),
       title: title,
