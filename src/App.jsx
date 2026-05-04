@@ -15,24 +15,29 @@ function App() {
     }
     setArticlesData([...articlesData, newArticle]);
   };
+  
+  const delArticle = (id) => {
+    setArticlesData(articlesData.filter((article) => article.id !== id))
+  };
 
   return (
     <>
-    <section>
-      {articlesData.map(article => (
-        <section key={article.id}>
-          <h2>{article.title}</h2>
-          <p>{article.content}</p>
-        </section>
-      ))}
-    </section>
-    <hr/>
-    <form onSubmit={addArticleHandler}>
-      <input onChange={(event) => setTitle(event.target.value)} value={title} type="text" />
-      <input onChange={(event) => setContent(event.target.value)} value={content} type="text" />
-      <button type="submit">Aggiungi</button>
-    </form>
-    {console.log(articlesData)}
+        <form onSubmit={addArticleHandler}>
+          <input onChange={(event) => setTitle(event.target.value)} value={title} type="text" />
+          <input onChange={(event) => setContent(event.target.value)} value={content} type="text" />
+          <button type="submit">Aggiungi</button>
+        </form>
+        {console.log(articlesData)}
+        <hr />
+      <section>
+        {articlesData.map(article => (
+          <section key={article.id}>
+            <h2>{article.title}</h2>
+            <p>{article.content}</p>
+            <button onClick={() => delArticle(article.id)}>Rimuovi</button>
+          </section>
+        ))}
+      </section>
     </>
   );
 }
